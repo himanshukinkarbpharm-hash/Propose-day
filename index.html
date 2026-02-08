@@ -8,196 +8,203 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  margin:0;
-  overflow-x:hidden;
-  background:linear-gradient(180deg,#ff7aa2,#ff9dbb);
   font-family:'Poppins',sans-serif;
+  background:linear-gradient(#ff7aa2,#ffb6c9);
   color:white;
-}
-
-/* Floating hearts */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:20px;
-  animation:float 8s linear infinite;
-  opacity:0.7;
-}
-@keyframes float{
-  0%{transform:translateY(0);opacity:0}
-  10%{opacity:1}
-  100%{transform:translateY(-100vh);opacity:0}
-}
-
-/* Rose petals */
-.petal{
-  position:fixed;
-  top:-20px;
-  font-size:18px;
-  animation:fall 10s linear infinite;
-}
-@keyframes fall{
-  0%{transform:translateX(0) rotate(0)}
-  100%{transform:translateX(80px) rotate(360deg); top:110vh;}
-}
-
-.card{
-  max-width:420px;
-  margin:40px auto;
-  background:#ff9dbb;
-  border-radius:25px;
-  padding:25px;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  overflow-x:hidden;
   text-align:center;
 }
 
-h1,h2{
-  font-family:'Great Vibes',cursive;
+/* PETALS */
+.petal{
+  position:fixed;
+  top:-10%;
+  font-size:20px;
+  animation:fall linear infinite;
+  pointer-events:none;
 }
 
-h1{font-size:44px;}
-h2{font-size:36px;}
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+    opacity:0;
+  }
+}
 
-.image-box{
+/* CARD */
+.card{
+  margin:20px;
+  padding:30px 22px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(8px);
+  border-radius:25px;
+  box-shadow:0 25px 45px rgba(0,0,0,.25);
+}
+
+/* HEART */
+.heart{
+  font-size:60px;
+  animation:pulse 1.6s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.25);}
+}
+
+/* HEADINGS */
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:42px;
+  margin:15px 0;
+}
+
+/* SLIDESHOW */
+.slideshow{
   width:100%;
   height:420px;
-  background:black;
-  border-radius:20px;
   overflow:hidden;
-  margin:20px 0;
+  border-radius:20px;
+  margin:15px 0;
 }
 
-.image-box img{
+.slideshow img{
   width:100%;
   height:100%;
   object-fit:contain;
-  animation:fade 8s infinite;
+  display:none;
 }
 
-@keyframes fade{
-  0%{opacity:0}
-  10%{opacity:1}
-  90%{opacity:1}
-  100%{opacity:0}
+.slideshow img.active{
+  display:block;
 }
 
-/* Text reveal */
-.fade-line{
-  opacity:0;
-  animation:reveal 2.5s forwards;
-}
-
-.fade-line:nth-child(1){animation-delay:1s}
-.fade-line:nth-child(2){animation-delay:4s}
-.fade-line:nth-child(3){animation-delay:7s}
-.fade-line:nth-child(4){animation-delay:10s}
-
-@keyframes reveal{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
+/* BUTTONS */
 button{
-  margin-top:20px;
-  padding:12px 28px;
+  padding:14px 30px;
   border:none;
   border-radius:30px;
-  background:white;
-  color:#ff5c8a;
   font-size:16px;
-  cursor:pointer;
+  background:white;
+  color:#ff4f7b;
+  margin-top:20px;
 }
 
-/* Ring pop */
-.ring{
-  font-size:50px;
-  animation:pop 2s infinite;
+.music-btn{
+  position:fixed;
+  top:18px;
+  right:18px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  font-size:22px;
+  background:white;
+  box-shadow:0 10px 20px rgba(0,0,0,.3);
 }
-@keyframes pop{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.3)}
-  100%{transform:scale(1)}
+
+/* TYPING */
+.typing{
+  font-family:'Great Vibes',cursive;
+  font-size:22px;
+  white-space:pre-wrap;
+  min-height:200px;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" src="satranga.mp3" loop></audio>
+<!-- MUSIC -->
+<audio id="song" loop>
+  <source src="satranga.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" onclick="playMusic()">🔊</button>
 
-<div class="card" id="screen1">
-  ❤️
+<!-- SCENE 1 -->
+<div class="card">
+  <div class="heart">❤️</div>
   <h1>Happy Propose Day</h1>
-  <p>Tap to begin 💖</p>
-  <button onclick="start()">Start</button>
 </div>
 
-<div class="card" id="screen2" style="display:none;">
-  <h2>Our Memories 💕</h2>
-  <div class="image-box">
-    <img id="slide" src="photo1.jpg">
+<!-- SCENE 2 -->
+<div class="card">
+  <h1>Our Memories 💕</h1>
+
+  <div class="slideshow">
+    <img src="photo1.jpg" class="active">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+    <img src="photo5.jpg">
+    <img src="photo6.jpg">
+    <img src="photo7.jpg">
+    <img src="photo8.jpg">
   </div>
+
   <p>Every moment with you means everything to me.</p>
-  <button onclick="final()">One Last Thing 💍</button>
+  <button onclick="showFinal()">One Last Thing 💍</button>
 </div>
 
-<div class="card" id="screen3" style="display:none;">
-  <div class="ring">💍</div>
+<!-- SCENE 3 -->
+<div class="card" id="final" style="display:none;">
+  <div class="heart">❤️</div>
   <h1>Happy Propose Day</h1>
-
-  <p class="fade-line">Baby, loving you has been the most beautiful part of my life.</p>
-  <p class="fade-line">Things haven’t been perfect, but my heart never doubted us.</p>
-  <p class="fade-line">With time, patience and love — everything will be okay.</p>
-  <p class="fade-line"><b>I will always choose you, my jaan ❤️</b></p>
+  <div class="typing" id="typing"></div>
 </div>
 
 <script>
-let photos=[
-"photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg",
-"photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg"
-];
-let i=0;
-
-function start(){
- document.getElementById("music").play();
- document.getElementById("screen1").style.display="none";
- document.getElementById("screen2").style.display="block";
-
- setInterval(()=>{
-   i=(i+1)%photos.length;
-   document.getElementById("slide").src=photos[i];
- },8000);
-
- hearts();
- petals();
-}
-
-function final(){
- document.getElementById("screen2").style.display="none";
- document.getElementById("screen3").style.display="block";
-}
-
-function hearts(){
- setInterval(()=>{
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
- },500);
-}
-
-function petals(){
- setInterval(()=>{
+// 🌸 PETALS
+for(let i=0;i<20;i++){
   let p=document.createElement("div");
   p.className="petal";
-  p.innerHTML="🌹";
+  p.innerHTML="🌸";
   p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=5+Math.random()*5+"s";
+  p.style.fontSize=14+Math.random()*20+"px";
   document.body.appendChild(p);
-  setTimeout(()=>p.remove(),10000);
- },700);
+}
+
+// 🎵 MUSIC
+function playMusic(){
+  document.getElementById("song").play();
+}
+
+// 🖼️ SLIDESHOW
+let slides=document.querySelectorAll(".slideshow img");
+let i=0;
+setInterval(()=>{
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+},9000);
+
+// ⌨️ TYPING EFFECT
+const text=`Baby, loving you has been the most beautiful part of my life.
+I honestly can’t imagine a single tomorrow without you by my side.
+
+The past few months weren’t easy, but deep down I believe
+every storm only makes us stronger.
+
+With time, patience and love — everything will fall into place.
+
+No matter what life brings our way,
+I will always choose you — over everything and everyone. ❤️`;
+
+let index=0;
+function typeText(){
+  if(index<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(index);
+    index++;
+    setTimeout(typeText,60);
+  }
+}
+
+function showFinal(){
+  document.getElementById("final").style.display="block";
+  window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+  setTimeout(typeText,1200);
 }
 </script>
 
