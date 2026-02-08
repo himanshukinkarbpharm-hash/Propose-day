@@ -2,255 +2,202 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Propose Day ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
-  height:100vh;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  margin:0;
+  overflow-x:hidden;
+  background:linear-gradient(180deg,#ff7aa2,#ff9dbb);
   font-family:'Poppins',sans-serif;
   color:white;
-  overflow:hidden;
 }
 
-/* CARD */
-.container{
-  width:92%;
-  max-width:420px;
-  background:rgba(255,255,255,0.2);
-  backdrop-filter:blur(12px);
-  border-radius:22px;
-  padding:35px 25px;
-  text-align:center;
-  box-shadow:0 25px 45px rgba(0,0,0,0.35);
-  animation:fadeIn 1.5s ease;
-}
-
-.hidden{display:none;}
-
-h1{
-  font-family:'Great Vibes',cursive;
-  font-size:2.6rem;
-  margin-bottom:15px;
-}
-
-p{
-  font-size:1.05rem;
-  line-height:1.7;
-  margin-bottom:20px;
-}
-
-button{
-  background:white;
-  color:#ff4d6d;
-  border:none;
-  padding:12px 28px;
-  border-radius:30px;
-  font-size:1rem;
-  cursor:pointer;
-  transition:0.3s;
-}
-button:hover{
-  background:#ff4d6d;
-  color:white;
-  transform:scale(1.05);
-}
-
-/* HEART */
+/* Floating hearts */
 .heart{
-  font-size:3.6rem;
-  margin-bottom:12px;
-  animation:pulse 1.5s infinite;
+  position:fixed;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 8s linear infinite;
+  opacity:0.7;
+}
+@keyframes float{
+  0%{transform:translateY(0);opacity:0}
+  10%{opacity:1}
+  100%{transform:translateY(-100vh);opacity:0}
 }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.25);}
-  100%{transform:scale(1);}
+/* Rose petals */
+.petal{
+  position:fixed;
+  top:-20px;
+  font-size:18px;
+  animation:fall 10s linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateX(0) rotate(0)}
+  100%{transform:translateX(80px) rotate(360deg); top:110vh;}
 }
 
-/* GIFT */
-.gift{
-  font-size:3rem;
-  margin-bottom:15px;
-  animation:shake 1.4s infinite;
-}
-@keyframes shake{
-  0%{transform:rotate(0);}
-  25%{transform:rotate(10deg);}
-  50%{transform:rotate(-10deg);}
-  75%{transform:rotate(10deg);}
-  100%{transform:rotate(0);}
+.card{
+  max-width:420px;
+  margin:40px auto;
+  background:#ff9dbb;
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  text-align:center;
 }
 
-/* SLIDESHOW */
-.slideshow{
+h1,h2{
+  font-family:'Great Vibes',cursive;
+}
+
+h1{font-size:44px;}
+h2{font-size:36px;}
+
+.image-box{
   width:100%;
-  height:75vh;
-  max-height:520px;
-  border-radius:18px;
-  overflow:hidden;
+  height:420px;
   background:black;
-  position:relative;
-  margin-bottom:20px;
+  border-radius:20px;
+  overflow:hidden;
+  margin:20px 0;
 }
 
-.slideshow img{
-  position:absolute;
+.image-box img{
   width:100%;
   height:100%;
   object-fit:contain;
-  object-position:center;
+  animation:fade 8s infinite;
+}
+
+@keyframes fade{
+  0%{opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0}
+}
+
+/* Text reveal */
+.fade-line{
   opacity:0;
-  transition:opacity 3.5s ease;
+  animation:reveal 2.5s forwards;
 }
 
-.slideshow img.active{opacity:1;}
+.fade-line:nth-child(1){animation-delay:1s}
+.fade-line:nth-child(2){animation-delay:4s}
+.fade-line:nth-child(3){animation-delay:7s}
+.fade-line:nth-child(4){animation-delay:10s}
 
-/* HEART POP */
-.heart-burst{
-  font-size:4rem;
-  margin-bottom:15px;
-  animation:heartPop 2s infinite;
+@keyframes reveal{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-@keyframes heartPop{
-  0%{transform:scale(0);opacity:0;}
-  50%{transform:scale(1.4);opacity:1;}
-  100%{transform:scale(1);opacity:0.9;}
-}
-
-/* MUSIC BUTTON */
-.music-btn{
-  position:fixed;
-  top:15px;
-  right:15px;
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:white;
-  color:#ff4d6d;
+button{
+  margin-top:20px;
+  padding:12px 28px;
   border:none;
-  font-size:18px;
+  border-radius:30px;
+  background:white;
+  color:#ff5c8a;
+  font-size:16px;
   cursor:pointer;
-  z-index:999;
 }
 
-/* FADE */
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
+/* Ring pop */
+.ring{
+  font-size:50px;
+  animation:pop 2s infinite;
+}
+@keyframes pop{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.3)}
+  100%{transform:scale(1)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<audio id="bgMusic" src="satranga.mp3" loop></audio>
-<button class="music-btn" onclick="toggleMusic()">🔊</button>
+<audio id="music" src="satranga.mp3" loop></audio>
 
-<!-- SCENE 1 -->
-<div class="container" id="scene1">
-  <div class="gift">🎁</div>
-  <h1>Hey Divya…</h1>
-  <p>I have something very special for you 💫</p>
-  <button onclick="goScene2()">Start 💌</button>
-</div>
-
-<!-- SCENE 2 -->
-<div class="container hidden" id="scene2">
-  <h1>Our Memories 💕</h1>
-
-  <div class="slideshow">
-    <img src="photo1.jpg" class="active">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-    <img src="photo4.jpg">
-    <img src="photo5.jpg">
-    <img src="photo6.jpg">
-    <img src="photo7.jpg">
-    <img src="photo8.jpg">
-  </div>
-
-  <p>Every moment with you means everything to me.</p>
-  <button onclick="goScene3()">One Last Thing 💍</button>
-</div>
-
-<!-- SCENE 3 -->
-<div class="container hidden" id="scene3">
-  <div class="heart-burst">❤️</div>
+<div class="card" id="screen1">
+  ❤️
   <h1>Happy Propose Day</h1>
-  <p>
-    Baby, loving you has been the most beautiful part of my life.  
-    I honestly can’t imagine a single tomorrow without you by my side.
-    <br><br>
+  <p>Tap to begin 💖</p>
+  <button onclick="start()">Start</button>
+</div>
 
-    I know the past few months haven’t been easy for us,  
-    but deep down, I truly believe that every storm only makes us stronger.  
-    With time, patience, and love — everything will fall into place.
-    <br><br>
+<div class="card" id="screen2" style="display:none;">
+  <h2>Our Memories 💕</h2>
+  <div class="image-box">
+    <img id="slide" src="photo1.jpg">
+  </div>
+  <p>Every moment with you means everything to me.</p>
+  <button onclick="final()">One Last Thing 💍</button>
+</div>
 
-    You are my comfort, my happiness, my safe place…  
-    and I love you more than words can ever explain, my jaan.
-    <br><br>
+<div class="card" id="screen3" style="display:none;">
+  <div class="ring">💍</div>
+  <h1>Happy Propose Day</h1>
 
-    Happy Propose Day ❤️  
-    No matter what life brings our way,  
-    I will always choose <b>you</b> — over everything and everyone.
-  </p>
+  <p class="fade-line">Baby, loving you has been the most beautiful part of my life.</p>
+  <p class="fade-line">Things haven’t been perfect, but my heart never doubted us.</p>
+  <p class="fade-line">With time, patience and love — everything will be okay.</p>
+  <p class="fade-line"><b>I will always choose you, my jaan ❤️</b></p>
 </div>
 
 <script>
-let currentSlide = 0;
-const slides = document.querySelectorAll(".slideshow img");
-let musicStarted = false;
+let photos=[
+"photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg",
+"photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg"
+];
+let i=0;
 
-function goScene2(){
-  document.getElementById("scene1").classList.add("hidden");
-  document.getElementById("scene2").classList.remove("hidden");
-  startMusic();
-  startSlideshow();
+function start(){
+ document.getElementById("music").play();
+ document.getElementById("screen1").style.display="none";
+ document.getElementById("screen2").style.display="block";
+
+ setInterval(()=>{
+   i=(i+1)%photos.length;
+   document.getElementById("slide").src=photos[i];
+ },8000);
+
+ hearts();
+ petals();
 }
 
-function goScene3(){
-  document.getElementById("scene2").classList.add("hidden");
-  document.getElementById("scene3").classList.remove("hidden");
+function final(){
+ document.getElementById("screen2").style.display="none";
+ document.getElementById("screen3").style.display="block";
 }
 
-function startSlideshow(){
-  setInterval(()=>{
-    slides[currentSlide].classList.remove("active");
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add("active");
-  },7000); // slow romantic
+function hearts(){
+ setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+ },500);
 }
 
-function startMusic(){
-  if(!musicStarted){
-    const music = document.getElementById("bgMusic");
-    music.volume = 0.7;
-    music.play();
-    musicStarted = true;
-  }
-}
-
-function toggleMusic(){
-  const music = document.getElementById("bgMusic");
-  if(music.paused){
-    music.play();
-  }else{
-    music.pause();
-  }
+function petals(){
+ setInterval(()=>{
+  let p=document.createElement("div");
+  p.className="petal";
+  p.innerHTML="🌹";
+  p.style.left=Math.random()*100+"vw";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),10000);
+ },700);
 }
 </script>
 
