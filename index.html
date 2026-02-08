@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,7 +16,7 @@ body{
   overflow:hidden;
 }
 
-/* ---------- COMMON ---------- */
+/* COMMON */
 .scene{
   display:none;
   height:100vh;
@@ -37,7 +37,7 @@ body{
   position:relative;
 }
 
-/* ---------- BUTTON ---------- */
+/* BUTTON */
 .btn{
   margin-top:20px;
   padding:13px 26px;
@@ -49,7 +49,7 @@ body{
   font-weight:500;
 }
 
-/* ---------- MUSIC ---------- */
+/* MUSIC */
 .music-btn{
   position:fixed;
   top:14px;
@@ -65,22 +65,20 @@ body{
   z-index:10;
 }
 
-/* ---------- SCENE 1 ---------- */
+/* SCENE 1 */
 .heart{
   font-size:64px;
   margin-bottom:10px;
   animation:pulse 1.6s infinite;
 }
-@keyframes pulse{
-  50%{transform:scale(1.15)}
-}
+@keyframes pulse{50%{transform:scale(1.15)}}
 .title{
   font-family:'Great Vibes',cursive;
   font-size:42px;
   color:#fff;
 }
 
-/* ---------- SCENE 2 (FIXED SLIDESHOW) ---------- */
+/* SCENE 2 — FIXED SLIDESHOW (NO FACE CUT) */
 .slideshow{
   width:100%;
   height:340px;
@@ -95,13 +93,13 @@ body{
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;   /* 🔥 MAIN FIX */
+  object-fit:contain;     /* 🔥 MAIN FIX */
   opacity:0;
   transition:opacity 3s ease-in-out;
 }
 .slideshow img.active{opacity:1}
 
-/* ---------- PETALS ---------- */
+/* PETALS */
 .petals{
   position:fixed;
   inset:0;
@@ -118,7 +116,7 @@ body{
   to{transform:translateY(110vh) rotate(360deg)}
 }
 
-/* ---------- SCENE 3 (TEXT FIX) ---------- */
+/* SCENE 3 — TEXT FIX */
 .final-title{
   font-family:'Great Vibes',cursive;
   font-size:44px;
@@ -129,18 +127,18 @@ body{
 
 .typing p{
   opacity:0;
-  margin:14px 0;
+  margin:12px 0;
   font-family:'Great Vibes',cursive;
   font-size:20px;
   font-weight:700;
   color:#000;
-  transition:opacity 1.6s;
+  transition:opacity 1.8s;
 }
 .typing p.show{opacity:1}
 
 .end-heart{
   font-size:38px;
-  margin-top:10px;
+  margin-top:8px;
 }
 </style>
 </head>
@@ -190,10 +188,10 @@ body{
     <div class="final-title">Happy Propose Day</div>
 
     <div class="typing" id="typing">
-      <p>Baby, loving you has been the most beautiful part of my life.</p>
-      <p>I honestly can’t imagine a single tomorrow without you by my side.</p>
-      <p>The past few months haven’t been easy, but every storm only made us stronger.</p>
-      <p>With time, patience, and love — everything slowly falls into its perfect place.</p>
+      <p>Baby, I love you more than my life, and I honestly can’t imagine myself without you.</p>
+      <p>Things haven’t been perfect between us these past few months, but deep down I truly believe everything will be okay.</p>
+      <p>Every storm we faced only made us stronger, and with patience, trust, and love, everything slowly falls into place.</p>
+      <p>I love you, my jaan. No matter what life brings our way, I will always choose you — over everything and everyone.</p>
     </div>
 
     <div class="end-heart">❤️</div>
@@ -233,12 +231,12 @@ setInterval(()=>{
 /* PETALS */
 function startPetals(){
   petals.style.display="block";
-  for(let i=0;i<16;i++){
+  for(let i=0;i<14;i++){
     let p=document.createElement("div");
     p.className="petal";
     p.innerHTML="🌸";
     p.style.left=Math.random()*100+"%";
-    p.style.animationDuration=6+Math.random()*6+"s";
+    p.style.animationDuration=7+Math.random()*6+"s";
     petals.appendChild(p);
   }
 }
@@ -252,4 +250,4 @@ function revealText(){
 </script>
 
 </body>
-</html> 
+</html>
