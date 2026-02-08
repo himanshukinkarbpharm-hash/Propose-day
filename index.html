@@ -13,44 +13,50 @@
 body{
   font-family:'Poppins',sans-serif;
   background:linear-gradient(#ff7aa2,#ffb6c9);
-  color:white;
-  text-align:center;
-  overflow-x:hidden;
+  overflow:hidden;   /* 🔥 IMPORTANT */
+}
+
+/* COMMON SCENE STYLE */
+.scene{
+  height:100vh;
+  width:100vw;
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.scene.active{
+  display:flex;
 }
 
 .card{
-  margin:20px;
-  padding:30px 22px;
-  background:rgba(255,255,255,0.15);
+  width:90%;
+  max-width:420px;
+  padding:28px 22px;
+  text-align:center;
+  background:rgba(255,255,255,0.18);
   backdrop-filter:blur(8px);
-  border-radius:25px;
-  box-shadow:0 25px 45px rgba(0,0,0,.25);
+  border-radius:26px;
+  box-shadow:0 25px 45px rgba(0,0,0,.3);
+  color:white;
 }
-
-.hidden{display:none}
 
 h1{
   font-family:'Great Vibes',cursive;
   font-size:42px;
-  margin:15px 0;
-}
-
-p{
-  font-size:15px;
-  line-height:1.8;
+  margin:12px 0;
 }
 
 button{
+  margin-top:20px;
   padding:14px 30px;
   border:none;
   border-radius:30px;
   background:white;
   color:#ff4f7b;
   font-size:16px;
-  margin-top:20px;
 }
 
-/* HEART */
 .heart{
   font-size:60px;
   animation:pulse 1.6s infinite;
@@ -62,10 +68,9 @@ button{
 /* SLIDESHOW */
 .slideshow{
   width:100%;
-  height:420px;
-  overflow:hidden;
+  height:380px;
   border-radius:20px;
-  margin:15px 0;
+  overflow:hidden;
 }
 .slideshow img{
   width:100%;
@@ -75,7 +80,15 @@ button{
 }
 .slideshow img.active{display:block}
 
-/* PETALS (FINAL SCENE ONLY) */
+/* FINAL TEXT */
+.typing{
+  font-family:'Great Vibes',cursive;
+  font-size:22px;
+  color:#d4af37;   /* ✨ GOLDEN */
+  min-height:260px;
+}
+
+/* PETALS */
 .petal{
   position:fixed;
   top:-10%;
@@ -85,14 +98,6 @@ button{
 }
 @keyframes fall{
   to{transform:translateY(120vh) rotate(360deg);opacity:0}
-}
-
-/* TYPING */
-.typing{
-  font-family:'Great Vibes',cursive;
-  font-size:22px;
-  white-space:pre-wrap;
-  min-height:240px;
 }
 </style>
 </head>
@@ -105,57 +110,60 @@ button{
 </audio>
 
 <!-- SCENE 1 -->
-<div class="card" id="scene1">
-  <div class="heart">❤️</div>
-  <h1>Happy Propose Day</h1>
-  <button onclick="goScene2()">I have something special for you 💖</button>
+<div class="scene active" id="scene1">
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>Happy Propose Day</h1>
+    <button onclick="toScene2()">I have something special for you 💖</button>
+  </div>
 </div>
 
 <!-- SCENE 2 -->
-<div class="card hidden" id="scene2">
-  <h1>Our Memories 💕</h1>
+<div class="scene" id="scene2">
+  <div class="card">
+    <h1>Our Memories 💕</h1>
 
-  <div class="slideshow">
-    <img src="photo1.jpg" class="active">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-    <img src="photo4.jpg">
-    <img src="photo5.jpg">
-    <img src="photo6.jpg">
-    <img src="photo7.jpg">
-    <img src="photo8.jpg">
+    <div class="slideshow">
+      <img src="photo1.jpg" class="active">
+      <img src="photo2.jpg">
+      <img src="photo3.jpg">
+      <img src="photo4.jpg">
+      <img src="photo5.jpg">
+      <img src="photo6.jpg">
+      <img src="photo7.jpg">
+      <img src="photo8.jpg">
+    </div>
+
+    <p>Every moment with you means everything to me.</p>
+    <button onclick="toScene3()">One Last Thing 💍</button>
   </div>
-
-  <p>Every moment with you means everything to me.</p>
-  <button onclick="goScene3()">One Last Thing 💍</button>
 </div>
 
 <!-- SCENE 3 -->
-<div class="card hidden" id="scene3">
-  <div class="heart">❤️</div>
-  <h1>Happy Propose Day</h1>
-  <div class="typing" id="typing"></div>
+<div class="scene" id="scene3">
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>Happy Propose Day</h1>
+    <div class="typing" id="typing"></div>
+  </div>
 </div>
 
 <script>
-/* SCENE TRANSITIONS */
-function goScene2(){
-  document.getElementById("scene1").style.display="none";
-  document.getElementById("scene2").style.display="block";
-  window.scrollTo(0,0);
+/* SCENE SWITCH */
+function toScene2(){
+  document.getElementById("scene1").classList.remove("active");
+  document.getElementById("scene2").classList.add("active");
 
-  // 🎵 MUSIC STARTS HERE (user action – mobile safe)
   const song=document.getElementById("song");
-  if(song.paused){ song.play(); }
+  song.play();   // 🎵 starts here
 }
 
-function goScene3(){
-  document.getElementById("scene2").style.display="none";
-  document.getElementById("scene3").style.display="block";
-  window.scrollTo(0,0);
+function toScene3(){
+  document.getElementById("scene2").classList.remove("active");
+  document.getElementById("scene3").classList.add("active");
 
-  startPetals();
-  setTimeout(typeText,1200);
+  petals();
+  setTimeout(typeText,800);
 }
 
 /* SLIDESHOW */
@@ -168,26 +176,23 @@ setInterval(()=>{
 },9000);
 
 /* PETALS */
-function startPetals(){
-  for(let i=0;i<20;i++){
+function petals(){
+  for(let i=0;i<25;i++){
     let p=document.createElement("div");
     p.className="petal";
     p.innerHTML="🌸";
     p.style.left=Math.random()*100+"vw";
     p.style.animationDuration=5+Math.random()*5+"s";
-    p.style.fontSize=14+Math.random()*20+"px";
     document.body.appendChild(p);
   }
 }
 
 /* TYPING TEXT */
 const text=`Baby, loving you has been the most beautiful part of my life.
-I honestly can’t imagine a single tomorrow without you by my side.
+I honestly can’t imagine a single tomorrow without you.
 
-The past few months weren’t easy, but deep down I believe
-every storm only makes us stronger.
-
-With time, patience and love — everything will fall into place.
+The past few months were not easy,
+but every storm only made us stronger.
 
 No matter what life brings our way,
 I will always choose you — over everything and everyone. ❤️`;
@@ -197,7 +202,7 @@ function typeText(){
   if(t<text.length){
     document.getElementById("typing").innerHTML+=text.charAt(t);
     t++;
-    setTimeout(typeText,60);
+    setTimeout(typeText,70);
   }
 }
 </script>
