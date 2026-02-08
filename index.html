@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Propose Day ❤️</title>
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Segoe UI',sans-serif;
 }
 
 body{
@@ -19,32 +21,43 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  font-family:'Poppins',sans-serif;
   color:white;
-  text-align:center;
   overflow:hidden;
 }
 
+/* COMMON */
 .container{
   width:90%;
   max-width:420px;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(10px);
-  border-radius:20px;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
   padding:35px 25px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  text-align:center;
+  box-shadow:0 25px 45px rgba(0,0,0,0.3);
   animation:fadeIn 1.5s ease;
 }
 
 .hidden{display:none;}
 
-h1{font-size:2rem;margin-bottom:15px;}
-p{font-size:1.05rem;line-height:1.6;margin-bottom:20px;}
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:2.6rem;
+  margin-bottom:15px;
+}
+
+p{
+  font-size:1.05rem;
+  line-height:1.6;
+  margin-bottom:20px;
+}
 
 button{
-  background:#fff;
+  background:white;
   color:#ff4d6d;
   border:none;
-  padding:12px 25px;
+  padding:12px 28px;
   border-radius:30px;
   font-size:1rem;
   cursor:pointer;
@@ -52,46 +65,73 @@ button{
 }
 button:hover{
   background:#ff4d6d;
-  color:#fff;
+  color:white;
   transform:scale(1.05);
 }
 
+/* HEART */
 .heart{
-  font-size:3rem;
+  font-size:3.5rem;
+  margin-bottom:10px;
   animation:pulse 1.5s infinite;
-  margin-bottom:15px;
 }
 
 @keyframes pulse{
   0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
+  50%{transform:scale(1.25);}
   100%{transform:scale(1);}
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
+/* GIFT */
+.gift{
+  font-size:3rem;
+  margin-bottom:15px;
+  animation:shake 1.4s infinite;
+}
+@keyframes shake{
+  0%{transform:rotate(0);}
+  25%{transform:rotate(10deg);}
+  50%{transform:rotate(-10deg);}
+  75%{transform:rotate(10deg);}
+  100%{transform:rotate(0);}
 }
 
 /* SLIDESHOW */
 .slideshow{
-  position:relative;
   width:100%;
-  height:260px;
+  height:65vh;
+  max-height:420px;
+  border-radius:18px;
   overflow:hidden;
-  border-radius:15px;
   margin-bottom:20px;
+  background:black;
+  position:relative;
 }
+
 .slideshow img{
   position:absolute;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;   /* FULL PHOTO – NO CROP */
   opacity:0;
-  transition:opacity 1.5s ease;
+  transition:opacity 2.5s ease;
 }
+
 .slideshow img.active{
   opacity:1;
+}
+
+/* HEART BURST */
+.heart-burst{
+  font-size:4rem;
+  margin-bottom:15px;
+  animation:heartPop 2s infinite;
+}
+
+@keyframes heartPop{
+  0%{transform:scale(0);opacity:0;}
+  50%{transform:scale(1.4);opacity:1;}
+  100%{transform:scale(1);opacity:0.85;}
 }
 
 /* MUSIC BUTTON */
@@ -99,31 +139,37 @@ button:hover{
   position:fixed;
   top:15px;
   right:15px;
-  background:rgba(255,255,255,0.9);
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:white;
   color:#ff4d6d;
   border:none;
-  border-radius:50%;
-  width:45px;
-  height:45px;
   font-size:18px;
   cursor:pointer;
-  z-index:1000;
+  z-index:999;
+}
+
+/* FADE */
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
+<!-- MUSIC (Satranga) -->
 <iframe id="music" width="0" height="0"
-src="https://www.youtube.com/embed/8sLS2knUa6Y?autoplay=1&loop=1&playlist=8sLS2knUa6Y&mute=1"
-frameborder="0" allow="autoplay"></iframe>
+src="https://www.youtube.com/embed/8sLS2knUa6Y?enablejsapi=1&loop=1&playlist=8sLS2knUa6Y"
+frameborder="0"></iframe>
 
 <button class="music-btn" onclick="toggleMusic()">🔊</button>
 
 <!-- SCENE 1 -->
 <div class="container" id="scene1">
-  <div class="heart">❤️</div>
+  <div class="gift">🎁</div>
   <h1>Hey Divya…</h1>
   <p>I have something very special for you 💫</p>
   <button onclick="goScene2()">Start 💌</button>
@@ -150,8 +196,8 @@ frameborder="0" allow="autoplay"></iframe>
 
 <!-- SCENE 3 -->
 <div class="container hidden" id="scene3">
-  <div class="heart">💍</div>
-  <h1>Happy Propose Day ❤️</h1>
+  <div class="heart-burst">❤️</div>
+  <h1>Happy Propose Day</h1>
   <p>
     Baby, I love you more than my life, and I honestly can’t imagine myself without you.<br><br>
     Things haven’t been perfect between us these past few months, but I truly believe that with time, everything will be okay.<br><br>
@@ -167,7 +213,7 @@ const slides = document.querySelectorAll(".slideshow img");
 function goScene2(){
   document.getElementById("scene1").classList.add("hidden");
   document.getElementById("scene2").classList.remove("hidden");
-  document.getElementById("music").src += "";
+  startMusic();
   startSlideshow();
 }
 
@@ -181,18 +227,24 @@ function startSlideshow(){
     slides[currentSlide].classList.remove("active");
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add("active");
-  },2500);
+  },5000); // SLOW SLIDESHOW
 }
 
-let muted = true;
+let musicOn = false;
+function startMusic(){
+  if(!musicOn){
+    const iframe = document.getElementById("music");
+    iframe.src += "&autoplay=1";
+    musicOn = true;
+  }
+}
+
 function toggleMusic(){
   const iframe = document.getElementById("music");
-  if(muted){
+  if(iframe.src.includes("mute=1")){
     iframe.src = iframe.src.replace("mute=1","mute=0");
-    muted=false;
   }else{
-    iframe.src = iframe.src.replace("mute=0","mute=1");
-    muted=true;
+    iframe.src += "&mute=1";
   }
 }
 </script>
