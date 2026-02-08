@@ -2,90 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Propose Day ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Propose Day ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(#ff7aa2,#ffb6c9);
-  overflow:hidden;   /* 🔥 IMPORTANT */
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff7eb3,#ff758c);
+  min-height:100vh;
+  overflow:hidden;
 }
 
-/* COMMON SCENE STYLE */
 .scene{
-  height:100vh;
-  width:100vw;
   display:none;
-  justify-content:center;
+  height:100vh;
   align-items:center;
+  justify-content:center;
 }
 
-.scene.active{
-  display:flex;
-}
+.scene.active{display:flex}
 
 .card{
   width:90%;
   max-width:420px;
-  padding:28px 22px;
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(10px);
+  border-radius:25px;
+  padding:30px 20px;
   text-align:center;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(8px);
-  border-radius:26px;
-  box-shadow:0 25px 45px rgba(0,0,0,.3);
-  color:white;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  position:relative;
+  z-index:2;
 }
 
 h1{
   font-family:'Great Vibes',cursive;
   font-size:42px;
-  margin:12px 0;
-}
-
-button{
-  margin-top:20px;
-  padding:14px 30px;
-  border:none;
-  border-radius:30px;
-  background:white;
-  color:#ff4f7b;
-  font-size:16px;
+  color:white;
+  margin:15px 0;
 }
 
 .heart{
   font-size:60px;
-  animation:pulse 1.6s infinite;
+  animation:pulse 1.5s infinite;
 }
+
 @keyframes pulse{
-  50%{transform:scale(1.25)}
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
 }
+
+.btn{
+  margin-top:25px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff4d6d;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.btn:hover{background:#ff4d6d;color:white}
 
 /* SLIDESHOW */
 .slideshow{
   width:100%;
-  height:380px;
+  height:360px;
   border-radius:20px;
   overflow:hidden;
+  margin:15px 0;
 }
+
 .slideshow img{
   width:100%;
   height:100%;
-  object-fit:contain;
-  display:none;
+  object-fit:contain;   /* 🔥 image FULL, no cut */
+  position:absolute;
+  opacity:0;
+  transition:opacity 2s ease-in-out;
 }
-.slideshow img.active{display:block}
+
+.slideshow img.active{opacity:1}
 
 /* FINAL TEXT */
 .typing{
   font-family:'Great Vibes',cursive;
-  font-size:22px;
-  color:#d4af37;   /* ✨ GOLDEN */
-  min-height:260px;
+  font-size:24px;
+  font-weight:600;
+  color:#000;
+  line-height:1.6;
+  min-height:320px;
 }
 
 /* PETALS */
@@ -95,26 +108,41 @@ button{
   font-size:18px;
   animation:fall linear infinite;
   pointer-events:none;
+  z-index:0;
 }
+
 @keyframes fall{
-  to{transform:translateY(120vh) rotate(360deg);opacity:0}
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* MUSIC ICON */
+.music-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:white;
+  border-radius:50%;
+  padding:10px;
+  z-index:5;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
 <audio id="song" loop>
   <source src="satranga.mp3" type="audio/mpeg">
 </audio>
+
+<div class="music-btn" onclick="toggleMusic()">🔊</div>
 
 <!-- SCENE 1 -->
 <div class="scene active" id="scene1">
   <div class="card">
     <div class="heart">❤️</div>
     <h1>Happy Propose Day</h1>
-    <button onclick="toScene2()">I have something special for you 💖</button>
+    <button class="btn" onclick="toScene2()">I have something special for you 💌</button>
   </div>
 </div>
 
@@ -134,8 +162,8 @@ button{
       <img src="photo8.jpg">
     </div>
 
-    <p>Every moment with you means everything to me.</p>
-    <button onclick="toScene3()">One Last Thing 💍</button>
+    <p style="color:white">Every moment with you means everything to me.</p>
+    <button class="btn" onclick="toScene3()">One Last Thing 💍</button>
   </div>
 </div>
 
@@ -143,67 +171,82 @@ button{
 <div class="scene" id="scene3">
   <div class="card">
     <div class="heart">❤️</div>
-    <h1>Happy Propose Day</h1>
     <div class="typing" id="typing"></div>
   </div>
 </div>
 
 <script>
-/* SCENE SWITCH */
+/* MUSIC */
+function toggleMusic(){
+  const s=document.getElementById("song");
+  s.paused?s.play():s.pause();
+}
+
+/* SCENES */
 function toScene2(){
   document.getElementById("scene1").classList.remove("active");
   document.getElementById("scene2").classList.add("active");
-
-  const song=document.getElementById("song");
-  song.play();   // 🎵 starts here
+  document.getElementById("song").play();
+  startPetals();
 }
 
 function toScene3(){
   document.getElementById("scene2").classList.remove("active");
   document.getElementById("scene3").classList.add("active");
-
-  petals();
-  setTimeout(typeText,800);
+  typeText();
 }
 
 /* SLIDESHOW */
-let slides=document.querySelectorAll(".slideshow img");
-let i=0;
+let imgs=document.querySelectorAll(".slideshow img");
+let idx=0;
 setInterval(()=>{
-  slides[i].classList.remove("active");
-  i=(i+1)%slides.length;
-  slides[i].classList.add("active");
-},9000);
+  imgs[idx].classList.remove("active");
+  idx=(idx+1)%imgs.length;
+  imgs[idx].classList.add("active");
+},6000); // ⏳ slow change
+
+/* TYPING EFFECT */
+const text=`Baby, loving you has been the most beautiful part of my life.
+Every smile of yours feels like home to me.
+
+I honestly can’t imagine a single tomorrow
+without you standing by my side.
+
+The past few months haven’t been easy,
+but deep down I know every storm only made us stronger.
+
+With time, patience, and love,
+everything slowly falls into its perfect place.
+
+You are my comfort,
+my happiness,
+my safe place…
+
+And no matter what life brings our way,
+I will always choose you —
+over everything and everyone. ❤️`;
+
+let i=0;
+function typeText(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=
+      text.charAt(i)==="\n"?"<br>":text.charAt(i);
+    i++;
+    setTimeout(typeText,70); // ⏳ slow typing
+  }
+}
 
 /* PETALS */
-function petals(){
-  for(let i=0;i<25;i++){
+function startPetals(){
+  setInterval(()=>{
     let p=document.createElement("div");
     p.className="petal";
     p.innerHTML="🌸";
     p.style.left=Math.random()*100+"vw";
     p.style.animationDuration=5+Math.random()*5+"s";
     document.body.appendChild(p);
-  }
-}
-
-/* TYPING TEXT */
-const text=`Baby, loving you has been the most beautiful part of my life.
-I honestly can’t imagine a single tomorrow without you.
-
-The past few months were not easy,
-but every storm only made us stronger.
-
-No matter what life brings our way,
-I will always choose you — over everything and everyone. ❤️`;
-
-let t=0;
-function typeText(){
-  if(t<text.length){
-    document.getElementById("typing").innerHTML+=text.charAt(t);
-    t++;
-    setTimeout(typeText,70);
-  }
+    setTimeout(()=>p.remove(),10000);
+  },500);
 }
 </script>
 
