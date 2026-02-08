@@ -5,151 +5,170 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Propose Day ❤️</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(135deg,#ff7eb3,#ff758c);
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#ff9ebc,#ff6fa3);
   min-height:100vh;
   overflow:hidden;
 }
 
+/* common */
 .scene{
   display:none;
   height:100vh;
+  padding:20px;
   align-items:center;
   justify-content:center;
 }
-
 .scene.active{display:flex}
 
 .card{
-  width:90%;
-  max-width:420px;
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(10px);
-  border-radius:25px;
+  background:#ffb3cd;
+  border-radius:28px;
   padding:30px 20px;
+  max-width:420px;
+  width:100%;
+  box-shadow:0 25px 40px rgba(0,0,0,.25);
   text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
   position:relative;
-  z-index:2;
 }
 
-h1{
-  font-family:'Great Vibes',cursive;
-  font-size:42px;
-  color:white;
-  margin:15px 0;
-}
-
-.heart{
-  font-size:60px;
-  animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.2)}
-  100%{transform:scale(1)}
-}
-
+/* buttons */
 .btn{
   margin-top:25px;
-  padding:12px 28px;
+  padding:14px 28px;
   border:none;
   border-radius:30px;
-  background:white;
-  color:#ff4d6d;
+  background:#fff;
+  color:#ff4f8b;
   font-size:16px;
   cursor:pointer;
+  font-weight:500;
 }
 
-.btn:hover{background:#ff4d6d;color:white}
+/* scene 1 */
+.heart{
+  font-size:70px;
+  margin-bottom:10px;
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+.title{
+  font-family:'Great Vibes',cursive;
+  font-size:42px;
+  color:#fff;
+}
 
-/* SLIDESHOW */
+/* scene 2 slideshow */
 .slideshow{
   width:100%;
   height:360px;
-  border-radius:20px;
-  overflow:hidden;
   margin:15px 0;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
 }
-
 .slideshow img{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
-  object-fit:contain;   /* 🔥 image FULL, no cut */
-  position:absolute;
+  object-fit:contain;
   opacity:0;
-  transition:opacity 2s ease-in-out;
+  transition:opacity 3s ease-in-out;
 }
-
 .slideshow img.active{opacity:1}
 
-/* FINAL TEXT */
-.typing{
-  font-family:'Great Vibes',cursive;
-  font-size:24px;
-  font-weight:600;
-  color:#000;
-  line-height:1.6;
-  min-height:320px;
-}
-
-/* PETALS */
-.petal{
+/* petals */
+.petals{
   position:fixed;
-  top:-10%;
-  font-size:18px;
-  animation:fall linear infinite;
+  inset:0;
   pointer-events:none;
-  z-index:0;
+  overflow:hidden;
+  display:none;
 }
-
+.petal{
+  position:absolute;
+  top:-10%;
+  font-size:22px;
+  animation:fall linear infinite;
+}
 @keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg)}
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
 }
 
-/* MUSIC ICON */
+/* scene 3 typing */
+.final-title{
+  font-family:'Great Vibes',cursive;
+  font-size:44px;
+  color:#000;
+  font-weight:700;
+  margin-bottom:15px;
+}
+.typing p{
+  opacity:0;
+  margin:14px 0;
+  color:#000;
+  font-size:16px;
+  font-weight:500;
+  transition:opacity 1.5s;
+}
+.typing p.show{opacity:1}
+
+/* music button */
 .music-btn{
   position:fixed;
-  top:20px;
-  right:20px;
-  background:white;
+  top:15px;
+  right:15px;
+  width:48px;
+  height:48px;
   border-radius:50%;
-  padding:10px;
-  z-index:5;
-  cursor:pointer;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 </style>
 </head>
 
 <body>
 
+<!-- MUSIC -->
 <audio id="song" loop>
   <source src="satranga.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music-btn" onclick="toggleMusic()">🔊</div>
 
+<!-- PETALS -->
+<div class="petals" id="petals"></div>
+
 <!-- SCENE 1 -->
-<div class="scene active" id="scene1">
+<section class="scene active" id="scene1">
   <div class="card">
     <div class="heart">❤️</div>
-    <h1>Happy Propose Day</h1>
-    <button class="btn" onclick="toScene2()">I have something special for you 💌</button>
+    <div class="title">Happy Propose Day</div>
+    <button class="btn" onclick="goScene2()">I have something special for you 💍</button>
   </div>
-</div>
+</section>
 
 <!-- SCENE 2 -->
-<div class="scene" id="scene2">
+<section class="scene" id="scene2">
   <div class="card">
-    <h1>Our Memories 💕</h1>
+    <div class="title" style="font-size:36px">Our Memories 💕</div>
 
     <div class="slideshow">
       <img src="photo1.jpg" class="active">
@@ -162,91 +181,80 @@ h1{
       <img src="photo8.jpg">
     </div>
 
-    <p style="color:white">Every moment with you means everything to me.</p>
-    <button class="btn" onclick="toScene3()">One Last Thing 💍</button>
+    <p style="color:#fff">Every moment with you means everything to me.</p>
+    <button class="btn" onclick="goScene3()">One last thing 💎</button>
   </div>
-</div>
+</section>
 
 <!-- SCENE 3 -->
-<div class="scene" id="scene3">
+<section class="scene" id="scene3">
   <div class="card">
-    <div class="heart">❤️</div>
-    <div class="typing" id="typing"></div>
+    <div class="final-title">Happy Propose Day</div>
+
+    <div class="typing" id="typing">
+      <p>Baby, loving you has been the most beautiful part of my life.</p>
+      <p>I honestly can’t imagine a single tomorrow without you by my side.</p>
+      <p>The past few months haven’t been easy for us, but deep down, I know we are stronger.</p>
+      <p>With time, patience, and love — everything will fall into place.</p>
+      <p>You are my comfort, my happiness, my safe place… my jaan.</p>
+      <p><b>No matter what life brings, I will always choose YOU — over everything and everyone.</b></p>
+    </div>
   </div>
-</div>
+</section>
 
 <script>
 /* MUSIC */
+let musicOn=false;
 function toggleMusic(){
   const s=document.getElementById("song");
-  s.paused?s.play():s.pause();
+  if(!musicOn){s.play();musicOn=true}
+  else{s.pause();musicOn=false}
 }
 
 /* SCENES */
-function toScene2(){
+function goScene2(){
   document.getElementById("scene1").classList.remove("active");
   document.getElementById("scene2").classList.add("active");
-  document.getElementById("song").play();
+  document.getElementById("song").play(); // music starts here
+  musicOn=true;
   startPetals();
 }
-
-function toScene3(){
+function goScene3(){
   document.getElementById("scene2").classList.remove("active");
   document.getElementById("scene3").classList.add("active");
-  typeText();
+  revealText();
 }
 
 /* SLIDESHOW */
-let imgs=document.querySelectorAll(".slideshow img");
-let idx=0;
-setInterval(()=>{
-  imgs[idx].classList.remove("active");
-  idx=(idx+1)%imgs.length;
-  imgs[idx].classList.add("active");
-},6000); // ⏳ slow change
-
-/* TYPING EFFECT */
-const text=`Baby, loving you has been the most beautiful part of my life.
-Every smile of yours feels like home to me.
-
-I honestly can’t imagine a single tomorrow
-without you standing by my side.
-
-The past few months haven’t been easy,
-but deep down I know every storm only made us stronger.
-
-With time, patience, and love,
-everything slowly falls into its perfect place.
-
-You are my comfort,
-my happiness,
-my safe place…
-
-And no matter what life brings our way,
-I will always choose you —
-over everything and everyone. ❤️`;
-
+const slides=document.querySelectorAll(".slideshow img");
 let i=0;
-function typeText(){
-  if(i<text.length){
-    document.getElementById("typing").innerHTML+=
-      text.charAt(i)==="\n"?"<br>":text.charAt(i);
-    i++;
-    setTimeout(typeText,70); // ⏳ slow typing
-  }
-}
+setInterval(()=>{
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+},7000);
 
 /* PETALS */
 function startPetals(){
-  setInterval(()=>{
+  const box=document.getElementById("petals");
+  box.style.display="block";
+  for(let i=0;i<18;i++){
     let p=document.createElement("div");
     p.className="petal";
     p.innerHTML="🌸";
-    p.style.left=Math.random()*100+"vw";
-    p.style.animationDuration=5+Math.random()*5+"s";
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),10000);
-  },500);
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDuration=6+Math.random()*6+"s";
+    p.style.fontSize=18+Math.random()*10+"px";
+    box.appendChild(p);
+  }
+}
+
+/* TYPING */
+function revealText(){
+  const lines=document.querySelectorAll("#typing p");
+  lines.forEach((l,idx)=>{
+    setTimeout(()=>l.classList.add("show"),idx*2200);
+  });
 }
 </script>
 
