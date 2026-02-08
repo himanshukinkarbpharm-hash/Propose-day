@@ -1,136 +1,59 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Propose Day ❤️</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:Poppins,sans-serif;
   background:linear-gradient(135deg,#ff9ebc,#ff6fa3);
-  min-height:100vh;
   overflow:hidden;
 }
 
-/* common */
+/* ---------- COMMON ---------- */
 .scene{
   display:none;
   height:100vh;
-  padding:20px;
   align-items:center;
   justify-content:center;
+  padding:18px;
 }
 .scene.active{display:flex}
 
 .card{
-  background:#ffb3cd;
-  border-radius:28px;
-  padding:30px 20px;
+  background:#ffb6cf;
+  border-radius:26px;
+  padding:24px;
   max-width:420px;
   width:100%;
-  box-shadow:0 25px 40px rgba(0,0,0,.25);
   text-align:center;
+  box-shadow:0 25px 40px rgba(0,0,0,.25);
   position:relative;
 }
 
-/* buttons */
+/* ---------- BUTTON ---------- */
 .btn{
-  margin-top:25px;
-  padding:14px 28px;
+  margin-top:20px;
+  padding:13px 26px;
   border:none;
-  border-radius:30px;
+  border-radius:28px;
   background:#fff;
   color:#ff4f8b;
-  font-size:16px;
-  cursor:pointer;
+  font-size:15px;
   font-weight:500;
 }
 
-/* scene 1 */
-.heart{
-  font-size:70px;
-  margin-bottom:10px;
-  animation:pulse 1.6s infinite;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15)}
-}
-.title{
-  font-family:'Great Vibes',cursive;
-  font-size:42px;
-  color:#fff;
-}
-
-/* scene 2 slideshow */
-.slideshow{
-  width:100%;
-  height:360px;
-  margin:15px 0;
-  border-radius:22px;
-  overflow:hidden;
-  position:relative;
-  background:#000;
-}
-.slideshow img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  opacity:0;
-  transition:opacity 3s ease-in-out;
-}
-.slideshow img.active{opacity:1}
-
-/* petals */
-.petals{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  display:none;
-}
-.petal{
-  position:absolute;
-  top:-10%;
-  font-size:22px;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  to{
-    transform:translateY(110vh) rotate(360deg);
-  }
-}
-
-/* scene 3 typing */
-.final-title{
-  font-family:'Great Vibes',cursive;
-  font-size:44px;
-  color:#000;
-  font-weight:700;
-  margin-bottom:15px;
-}
-.typing p{
-  opacity:0;
-  margin:14px 0;
-  color:#000;
-  font-size:16px;
-  font-weight:500;
-  transition:opacity 1.5s;
-}
-.typing p.show{opacity:1}
-
-/* music button */
+/* ---------- MUSIC ---------- */
 .music-btn{
   position:fixed;
-  top:15px;
-  right:15px;
+  top:14px;
+  right:14px;
   width:48px;
   height:48px;
   border-radius:50%;
@@ -139,21 +62,96 @@ body{
   align-items:center;
   justify-content:center;
   font-size:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  z-index:10;
+}
+
+/* ---------- SCENE 1 ---------- */
+.heart{
+  font-size:64px;
+  margin-bottom:10px;
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{
+  50%{transform:scale(1.15)}
+}
+.title{
+  font-family:'Great Vibes',cursive;
+  font-size:42px;
+  color:#fff;
+}
+
+/* ---------- SCENE 2 (FIXED SLIDESHOW) ---------- */
+.slideshow{
+  width:100%;
+  height:340px;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  margin:16px 0;
+  background:#000;
+}
+.slideshow img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;   /* 🔥 MAIN FIX */
+  opacity:0;
+  transition:opacity 3s ease-in-out;
+}
+.slideshow img.active{opacity:1}
+
+/* ---------- PETALS ---------- */
+.petals{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  display:none;
+}
+.petal{
+  position:absolute;
+  top:-10%;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* ---------- SCENE 3 (TEXT FIX) ---------- */
+.final-title{
+  font-family:'Great Vibes',cursive;
+  font-size:44px;
+  font-weight:700;
+  color:#000;
+  margin-bottom:10px;
+}
+
+.typing p{
+  opacity:0;
+  margin:14px 0;
+  font-family:'Great Vibes',cursive;
+  font-size:20px;
+  font-weight:700;
+  color:#000;
+  transition:opacity 1.6s;
+}
+.typing p.show{opacity:1}
+
+.end-heart{
+  font-size:38px;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
 <audio id="song" loop>
   <source src="satranga.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music-btn" onclick="toggleMusic()">🔊</div>
-
-<!-- PETALS -->
 <div class="petals" id="petals"></div>
 
 <!-- SCENE 1 -->
@@ -194,38 +192,36 @@ body{
     <div class="typing" id="typing">
       <p>Baby, loving you has been the most beautiful part of my life.</p>
       <p>I honestly can’t imagine a single tomorrow without you by my side.</p>
-      <p>The past few months haven’t been easy for us, but deep down, I know we are stronger.</p>
-      <p>With time, patience, and love — everything will fall into place.</p>
-      <p>You are my comfort, my happiness, my safe place… my jaan.</p>
-      <p><b>No matter what life brings, I will always choose YOU — over everything and everyone.</b></p>
+      <p>The past few months haven’t been easy, but every storm only made us stronger.</p>
+      <p>With time, patience, and love — everything slowly falls into its perfect place.</p>
     </div>
+
+    <div class="end-heart">❤️</div>
   </div>
 </section>
 
 <script>
-/* MUSIC */
 let musicOn=false;
 function toggleMusic(){
   const s=document.getElementById("song");
-  if(!musicOn){s.play();musicOn=true}
-  else{s.pause();musicOn=false}
+  musicOn? s.pause():s.play();
+  musicOn=!musicOn;
 }
 
-/* SCENES */
 function goScene2(){
-  document.getElementById("scene1").classList.remove("active");
-  document.getElementById("scene2").classList.add("active");
-  document.getElementById("song").play(); // music starts here
-  musicOn=true;
+  scene1.classList.remove("active");
+  scene2.classList.add("active");
+  song.play(); musicOn=true;
   startPetals();
 }
+
 function goScene3(){
-  document.getElementById("scene2").classList.remove("active");
-  document.getElementById("scene3").classList.add("active");
+  scene2.classList.remove("active");
+  scene3.classList.add("active");
   revealText();
 }
 
-/* SLIDESHOW */
+/* SLIDES */
 const slides=document.querySelectorAll(".slideshow img");
 let i=0;
 setInterval(()=>{
@@ -236,27 +232,24 @@ setInterval(()=>{
 
 /* PETALS */
 function startPetals(){
-  const box=document.getElementById("petals");
-  box.style.display="block";
-  for(let i=0;i<18;i++){
+  petals.style.display="block";
+  for(let i=0;i<16;i++){
     let p=document.createElement("div");
     p.className="petal";
     p.innerHTML="🌸";
     p.style.left=Math.random()*100+"%";
     p.style.animationDuration=6+Math.random()*6+"s";
-    p.style.fontSize=18+Math.random()*10+"px";
-    box.appendChild(p);
+    petals.appendChild(p);
   }
 }
 
-/* TYPING */
+/* TEXT */
 function revealText(){
-  const lines=document.querySelectorAll("#typing p");
-  lines.forEach((l,idx)=>{
-    setTimeout(()=>l.classList.add("show"),idx*2200);
+  document.querySelectorAll("#typing p").forEach((p,i)=>{
+    setTimeout(()=>p.classList.add("show"),i*2200);
   });
 }
 </script>
 
 </body>
-</html>
+</html> 
