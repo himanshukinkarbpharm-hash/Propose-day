@@ -9,11 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   height:100vh;
@@ -26,16 +22,16 @@ body{
   overflow:hidden;
 }
 
-/* COMMON */
+/* CARD */
 .container{
-  width:90%;
+  width:92%;
   max-width:420px;
-  background:rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.2);
   backdrop-filter:blur(12px);
   border-radius:22px;
   padding:35px 25px;
   text-align:center;
-  box-shadow:0 25px 45px rgba(0,0,0,0.3);
+  box-shadow:0 25px 45px rgba(0,0,0,0.35);
   animation:fadeIn 1.5s ease;
 }
 
@@ -49,7 +45,7 @@ h1{
 
 p{
   font-size:1.05rem;
-  line-height:1.6;
+  line-height:1.7;
   margin-bottom:20px;
 }
 
@@ -71,8 +67,8 @@ button:hover{
 
 /* HEART */
 .heart{
-  font-size:3.5rem;
-  margin-bottom:10px;
+  font-size:3.6rem;
+  margin-bottom:12px;
   animation:pulse 1.5s infinite;
 }
 
@@ -99,29 +95,28 @@ button:hover{
 /* SLIDESHOW */
 .slideshow{
   width:100%;
-  height:65vh;
-  max-height:420px;
+  height:75vh;
+  max-height:520px;
   border-radius:18px;
   overflow:hidden;
-  margin-bottom:20px;
   background:black;
   position:relative;
+  margin-bottom:20px;
 }
 
 .slideshow img{
   position:absolute;
   width:100%;
   height:100%;
-  object-fit:contain;   /* FULL PHOTO – NO CROP */
+  object-fit:contain;
+  object-position:center;
   opacity:0;
-  transition:opacity 2.5s ease;
+  transition:opacity 3.5s ease;
 }
 
-.slideshow img.active{
-  opacity:1;
-}
+.slideshow img.active{opacity:1;}
 
-/* HEART BURST */
+/* HEART POP */
 .heart-burst{
   font-size:4rem;
   margin-bottom:15px;
@@ -131,7 +126,7 @@ button:hover{
 @keyframes heartPop{
   0%{transform:scale(0);opacity:0;}
   50%{transform:scale(1.4);opacity:1;}
-  100%{transform:scale(1);opacity:0.85;}
+  100%{transform:scale(1);opacity:0.9;}
 }
 
 /* MUSIC BUTTON */
@@ -139,8 +134,8 @@ button:hover{
   position:fixed;
   top:15px;
   right:15px;
-  width:46px;
-  height:46px;
+  width:48px;
+  height:48px;
   border-radius:50%;
   background:white;
   color:#ff4d6d;
@@ -160,11 +155,8 @@ button:hover{
 
 <body>
 
-<!-- MUSIC (Satranga) -->
-<iframe id="music" width="0" height="0"
-src="https://www.youtube.com/embed/8sLS2knUa6Y?enablejsapi=1&loop=1&playlist=8sLS2knUa6Y"
-frameborder="0"></iframe>
-
+<!-- MUSIC -->
+<audio id="bgMusic" src="satranga.mp3" loop></audio>
 <button class="music-btn" onclick="toggleMusic()">🔊</button>
 
 <!-- SCENE 1 -->
@@ -199,16 +191,29 @@ frameborder="0"></iframe>
   <div class="heart-burst">❤️</div>
   <h1>Happy Propose Day</h1>
   <p>
-    Baby, I love you more than my life, and I honestly can’t imagine myself without you.<br><br>
-    Things haven’t been perfect between us these past few months, but I truly believe that with time, everything will be okay.<br><br>
-    I love you, my jaan.<br><br>
-    Happy Propose Day. No matter what, I will always choose you over everything and everyone. ❤️
+    Baby, loving you has been the most beautiful part of my life.  
+    I honestly can’t imagine a single tomorrow without you by my side.
+    <br><br>
+
+    I know the past few months haven’t been easy for us,  
+    but deep down, I truly believe that every storm only makes us stronger.  
+    With time, patience, and love — everything will fall into place.
+    <br><br>
+
+    You are my comfort, my happiness, my safe place…  
+    and I love you more than words can ever explain, my jaan.
+    <br><br>
+
+    Happy Propose Day ❤️  
+    No matter what life brings our way,  
+    I will always choose <b>you</b> — over everything and everyone.
   </p>
 </div>
 
 <script>
 let currentSlide = 0;
 const slides = document.querySelectorAll(".slideshow img");
+let musicStarted = false;
 
 function goScene2(){
   document.getElementById("scene1").classList.add("hidden");
@@ -227,24 +232,24 @@ function startSlideshow(){
     slides[currentSlide].classList.remove("active");
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add("active");
-  },5000); // SLOW SLIDESHOW
+  },7000); // slow romantic
 }
 
-let musicOn = false;
 function startMusic(){
-  if(!musicOn){
-    const iframe = document.getElementById("music");
-    iframe.src += "&autoplay=1";
-    musicOn = true;
+  if(!musicStarted){
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.7;
+    music.play();
+    musicStarted = true;
   }
 }
 
 function toggleMusic(){
-  const iframe = document.getElementById("music");
-  if(iframe.src.includes("mute=1")){
-    iframe.src = iframe.src.replace("mute=1","mute=0");
+  const music = document.getElementById("bgMusic");
+  if(music.paused){
+    music.play();
   }else{
-    iframe.src += "&mute=1";
+    music.pause();
   }
 }
 </script>
