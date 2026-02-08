@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Propose Day ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+.container{
+  width:90%;
+  max-width:420px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  padding:35px 25px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  animation:fadeIn 1.5s ease;
+}
+
+.hidden{display:none;}
+
+h1{font-size:2rem;margin-bottom:15px;}
+p{font-size:1.05rem;line-height:1.6;margin-bottom:20px;}
+
+button{
+  background:#fff;
+  color:#ff4d6d;
+  border:none;
+  padding:12px 25px;
+  border-radius:30px;
+  font-size:1rem;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  background:#ff4d6d;
+  color:#fff;
+  transform:scale(1.05);
+}
+
+.heart{
+  font-size:3rem;
+  animation:pulse 1.5s infinite;
+  margin-bottom:15px;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* SLIDESHOW */
+.slideshow{
+  position:relative;
+  width:100%;
+  height:260px;
+  overflow:hidden;
+  border-radius:15px;
+  margin-bottom:20px;
+}
+.slideshow img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+.slideshow img.active{
+  opacity:1;
+}
+
+/* MUSIC BUTTON */
+.music-btn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  background:rgba(255,255,255,0.9);
+  color:#ff4d6d;
+  border:none;
+  border-radius:50%;
+  width:45px;
+  height:45px;
+  font-size:18px;
+  cursor:pointer;
+  z-index:1000;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<iframe id="music" width="0" height="0"
+src="https://www.youtube.com/embed/8sLS2knUa6Y?autoplay=1&loop=1&playlist=8sLS2knUa6Y&mute=1"
+frameborder="0" allow="autoplay"></iframe>
+
+<button class="music-btn" onclick="toggleMusic()">🔊</button>
+
+<!-- SCENE 1 -->
+<div class="container" id="scene1">
+  <div class="heart">❤️</div>
+  <h1>Hey Divya…</h1>
+  <p>I have something very special for you 💫</p>
+  <button onclick="goScene2()">Start 💌</button>
+</div>
+
+<!-- SCENE 2 -->
+<div class="container hidden" id="scene2">
+  <h1>Our Memories 💕</h1>
+
+  <div class="slideshow">
+    <img src="photo1.jpg" class="active">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+    <img src="photo5.jpg">
+    <img src="photo6.jpg">
+    <img src="photo7.jpg">
+    <img src="photo8.jpg">
+  </div>
+
+  <p>Every moment with you means everything to me.</p>
+  <button onclick="goScene3()">One Last Thing 💍</button>
+</div>
+
+<!-- SCENE 3 -->
+<div class="container hidden" id="scene3">
+  <div class="heart">💍</div>
+  <h1>Happy Propose Day ❤️</h1>
+  <p>
+    Baby, I love you more than my life, and I honestly can’t imagine myself without you.<br><br>
+    Things haven’t been perfect between us these past few months, but I truly believe that with time, everything will be okay.<br><br>
+    I love you, my jaan.<br><br>
+    Happy Propose Day. No matter what, I will always choose you over everything and everyone. ❤️
+  </p>
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slideshow img");
+
+function goScene2(){
+  document.getElementById("scene1").classList.add("hidden");
+  document.getElementById("scene2").classList.remove("hidden");
+  document.getElementById("music").src += "";
+  startSlideshow();
+}
+
+function goScene3(){
+  document.getElementById("scene2").classList.add("hidden");
+  document.getElementById("scene3").classList.remove("hidden");
+}
+
+function startSlideshow(){
+  setInterval(()=>{
+    slides[currentSlide].classList.remove("active");
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add("active");
+  },2500);
+}
+
+let muted = true;
+function toggleMusic(){
+  const iframe = document.getElementById("music");
+  if(muted){
+    iframe.src = iframe.src.replace("mute=1","mute=0");
+    muted=false;
+  }else{
+    iframe.src = iframe.src.replace("mute=0","mute=1");
+    muted=true;
+  }
+}
+</script>
+
+</body>
+</html>
